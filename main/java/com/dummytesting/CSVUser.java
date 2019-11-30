@@ -6,16 +6,47 @@ import com.opencsv.bean.CsvBindByName;
 
     public class CSVUser {
 
-        @CsvBindByName
+        @CsvBindByName(column = "SrNo" ,required = true)
         private String SrNo;
 
-        @CsvBindByName
+        @CsvBindByName(column = "StateName" ,required = true)
         private String StateName;
 
-        @CsvBindByName
+        @CsvBindByName(column = "TIN",required = true)
         private String TIN;
 
-        @CsvBindByName
+        @CsvBindByName(column = "StateCode")
         private String StateCode;
 
+        public String getSrNo() {
+            return SrNo;
+        }
+
+        public void setSrNo(String srNo) {
+            SrNo = srNo;
+        }
+
+        public String getStateName() {
+            return StateName;
+        }
+
+        public void setStateName(String stateName) {
+            StateName = stateName;
+        }
+
+        public String getTIN() {
+            return TIN;
+        }
+
+        public void setTIN(String TIN) {
+            this.TIN = TIN;
+        }
+
+        public String getStateCode() {
+            return StateCode;
+        }
+
+        public void setStateCode(String stateCode) {
+            StateCode = stateCode;
+        }
     }
