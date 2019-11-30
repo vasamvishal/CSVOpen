@@ -31,6 +31,16 @@ public class StateCensusAnalyserTest {
             Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCHFILE, e.type);
         }
     }
+
+    @Test
+    public void ShouldCatchException_forImproperDelimiter() throws CSVFileException, IOException {
+        try {
+            Analyser analyser = new Analyser("/home/user/Pictures/StateCodeDuplicate.csv");
+            analyser.numberOfRecord();
+        } catch (CSVFileException e) {
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCHFILE, e.type);
+        }
+    }
 }
 
 
