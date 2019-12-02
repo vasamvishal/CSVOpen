@@ -2,7 +2,7 @@ package com.dummytesting;
 
 public class CSVFileException extends Exception{
     enum ExceptionType{
-        NO_SUCHFILE,NO_OPTIONS;
+        NO_SUCHFILE,WRONG_OPTIONS;
     }
     ExceptionType type;
 

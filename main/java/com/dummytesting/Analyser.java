@@ -41,7 +41,7 @@ public String SAMPLE_CSV_FILE_PATH="";
         }
         catch ( RuntimeException e)
         {
-            throw new CSVFileException("Please enter proper fileName Or Delimiter Problem",CSVFileException.ExceptionType.NO_SUCHFILE);
+            throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ",CSVFileException.ExceptionType.WRONG_OPTIONS);
         }
         return noOfRecord;
     }
