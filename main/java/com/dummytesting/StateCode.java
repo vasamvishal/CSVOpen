@@ -4,7 +4,7 @@ package com.dummytesting;
 
 import com.opencsv.bean.CsvBindByName;
 
-    public class CSVUser {
+    public class StateCode {
 
         @CsvBindByName(column = "SrNo" ,required = true)
         private String SrNo;
