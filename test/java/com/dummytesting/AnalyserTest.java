@@ -78,6 +78,15 @@ public class AnalyserTest {
             Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS, e.type);
         }
     }
+    @Test
+    public void ShouldCatchException_forImproperDelimiterinStateCensusData() throws CSVFileException, IOException {
+        try {
+            Analyser analyser = new Analyser("/home/user/Pictures/StateCensusDataDuplicate.csv");
+            analyser.numberOfRecord();
+        } catch (CSVFileException e) {
+            Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS, e.type);
+        }
+    }
 
 }
 
