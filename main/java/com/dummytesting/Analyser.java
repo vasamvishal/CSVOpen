@@ -13,9 +13,10 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
 public class Analyser {
-public String SAMPLE_CSV_FILE_PATH="";
+    public String SAMPLE_CSV_FILE_PATH = "";
+
     public Analyser(String SAMPLE_CSV_FILE_PATH) {
-        this.SAMPLE_CSV_FILE_PATH=SAMPLE_CSV_FILE_PATH;
+        this.SAMPLE_CSV_FILE_PATH = SAMPLE_CSV_FILE_PATH;
     }
 
     public int numberOfRecord() throws CSVFileException, IOException {
@@ -31,21 +32,18 @@ public String SAMPLE_CSV_FILE_PATH="";
                 csvUserIterator.next();
                 noOfRecord++;
             }
-        } catch (NoSuchFileException e)
-        {
+        } catch (NoSuchFileException e) {
             e.printStackTrace();
-        }
-        catch ( RuntimeException e)
-        {
-            throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ",CSVFileException.ExceptionType.WRONG_OPTIONS);
+        } catch (RuntimeException e) {
+            throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ", CSVFileException.ExceptionType.WRONG_OPTIONS);
         }
         return noOfRecord;
     }
 
     public int recordOfStateCensusData() throws IOException, CSVFileException {
-        int noOfRecord=0;
-        try{
-            Reader reader=Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
+        int noOfRecord = 0;
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
             CsvToBean csvToBean = new CsvToBeanBuilder(reader)
                     .withType(StateCensusData.class)
                     .withIgnoreLeadingWhiteSpace(true)
@@ -57,18 +55,15 @@ public String SAMPLE_CSV_FILE_PATH="";
             }
         } catch (NoSuchFileException e) {
             throw new CSVFileException("Please enter proper file name", CSVFileException.ExceptionType.NO_SUCHFILE);
-        }
-        catch ( RuntimeException e)
-        {
+        } catch (RuntimeException e) {
             try {
-                throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ",CSVFileException.ExceptionType.WRONG_OPTIONS);
+                throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ", CSVFileException.ExceptionType.WRONG_OPTIONS);
             } catch (CSVFileException ex) {
                 ex.printStackTrace();
             }
         }
         return noOfRecord;
     }
-
 }
 
 

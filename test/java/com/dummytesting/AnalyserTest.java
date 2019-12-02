@@ -68,6 +68,16 @@ public class AnalyserTest {
             Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCHFILE,e.type);
         }
     }
+    @Test
+    public void shouldCatchException_forImProperTypeName() throws IOException {
+        try {
+            Analyser analyser = new Analyser("/home/user/Pictures/StateCode.csv");
+            analyser.recordOfStateCensusData();
+        } catch (CSVFileException e) {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS, e.type);
+        }
+    }
 
 }
 
