@@ -56,6 +56,19 @@ public class AnalyserTest {
         Analyser analyser = new Analyser("/home/user/Pictures/StateCensusData.csv");
         Assert.assertEquals(29,analyser.recordOfStateCensusData());
     }
+    @Test
+    public void shouldCatch_FilenotFoundException_forImProperFile() throws IOException {
+        try {
+            Analyser analyser = new Analyser("/home/user/PicturesStateCensusData.csv");
+            analyser.recordOfStateCensusData();
+        }
+        catch (CSVFileException e)
+        {
+            System.out.println(e.getMessage());
+            Assert.assertEquals(CSVFileException.ExceptionType.NO_SUCHFILE,e.type);
+        }
+    }
+
 }
 
 
