@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-public class StateCensusAnalyserTest {
+public class AnalyserTest {
     @Test
     public void Shouldreturnhappy_ForProperFile() throws CSVFileException, IOException {
         Analyser stateCensusAnalyser = new Analyser("/home/user/Pictures/StateCode.csv");
@@ -50,8 +50,11 @@ public class StateCensusAnalyserTest {
         catch (CSVFileException e){
             Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS,e.type);
         }
-
-
+    }
+    @Test
+    public void shouldBeProper_forProperFile() throws IOException, CSVFileException {
+        Analyser analyser = new Analyser("/home/user/Pictures/StateCensusData.csv");
+        Assert.assertEquals(29,analyser.recordOfStateCensusData());
     }
 }
 
