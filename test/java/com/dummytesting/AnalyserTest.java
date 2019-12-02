@@ -87,6 +87,16 @@ public class AnalyserTest {
             Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS, e.type);
         }
     }
+    @Test
+    public void ShouldCatchException_forHavingNoHeadersinStateCensusData() throws CSVFileException, IOException {
+        try {
+            Analyser analyser = new Analyser("/home/user/Pictures/StateCodeDuplicate.csv");
+            analyser.numberOfRecord();
+        }
+        catch (CSVFileException e){
+            Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS,e.type);
+        }
+    }
 
 }
 

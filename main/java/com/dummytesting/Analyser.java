@@ -56,11 +56,7 @@ public class Analyser {
         } catch (NoSuchFileException e) {
             throw new CSVFileException("Please enter proper file name", CSVFileException.ExceptionType.NO_SUCHFILE);
         } catch (RuntimeException e) {
-            try {
                 throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ", CSVFileException.ExceptionType.WRONG_OPTIONS);
-            } catch (CSVFileException ex) {
-                ex.printStackTrace();
-            }
         }
         return noOfRecord;
     }
