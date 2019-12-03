@@ -20,6 +20,7 @@ public class Analyser {
 
     public int numberOfRecord(String SAMPLE_CSV_FILE_PATH, String POJO) throws CSVFileException, IOException, ClassNotFoundException {
         Object record = 0;
+        System.out.println(SAMPLE_CSV_FILE_PATH);
         int count=0;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
@@ -34,7 +35,8 @@ public class Analyser {
                 list.add(data);
                 count++;
             }
-            toSort(list);
+            sortThisListBasedOnStateName(list);
+            sortThisListBasedOnStatePopulation(list);
             Write(list);
         }catch(NoSuchFileException e){
                 e.printStackTrace();
@@ -52,9 +54,16 @@ public class Analyser {
             writer.close();
         }
 
-    private static void toSort(List<StateCensusData> list) {
-        Collections.sort(list);
+    private static void sortThisListBasedOnStateName(List<StateCensusData> censusList) {
+        Comparator<StateCensusData> c = (s1, s2) -> s1.getState().compareTo(s2.getState());
+        censusList.sort(c);
     }
+    private static void sortThisListBasedOnStatePopulation(List<StateCensusData> censusList) {
+        Comparator<StateCensusData> c = (s1, s2) -> Integer.parseInt(s2.getPopulation())- Integer.parseInt(s1.getPopulation());
+        censusList.sort(c);
+    }
+
+
 
 }
 
