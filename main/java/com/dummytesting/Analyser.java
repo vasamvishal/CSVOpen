@@ -37,6 +37,7 @@ public class Analyser {
             }
             sortThisListBasedOnStateName(list);
             sortThisListBasedOnStatePopulation(list);
+            sortThisListBasedOnDensityPerSqKmPopulation(list);
             Write(list);
         }catch(NoSuchFileException e){
                 e.printStackTrace();
@@ -59,6 +60,10 @@ public class Analyser {
         censusList.sort(c);
     }
     private static void sortThisListBasedOnStatePopulation(List<StateCensusData> censusList) {
+        Comparator<StateCensusData> c = (s1, s2) -> Integer.parseInt(s2.getPopulation())- Integer.parseInt(s1.getPopulation());
+        censusList.sort(c);
+    }
+    private static void sortThisListBasedOnDensityPerSqKmPopulation(List<StateCensusData> censusList) {
         Comparator<StateCensusData> c = (s1, s2) -> Integer.parseInt(s2.getPopulation())- Integer.parseInt(s1.getPopulation());
         censusList.sort(c);
     }
