@@ -2,7 +2,7 @@ package com.dummytesting;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class StateCensusData {
+public class StateCensusData  implements Comparable<StateCensusData>{
 
 
         @CsvBindByName(column = "State",required = true)
@@ -18,4 +18,46 @@ public class StateCensusData {
         private String DensityPerSqKm;
 
 
+        public String getState() {
+                return State;
+        }
+
+        public void setState(String state) {
+                State = state;
+        }
+
+        public String getPopulation() {
+                return Population;
+        }
+
+        public void setPopulation(String population) {
+                Population = population;
+        }
+
+        public String getAreaInSqKm() {
+                return AreaInSqKm;
+        }
+
+        public void setAreaInSqKm(String areaInSqKm) {
+                AreaInSqKm = areaInSqKm;
+        }
+
+        public String getDensityPerSqKm() {
+                return DensityPerSqKm;
+        }
+
+        public void setDensityPerSqKm(String densityPerSqKm) {
+                DensityPerSqKm = densityPerSqKm;
+        }
+
+        @Override
+        public String toString() {
+
+                return getState()+""+getPopulation()+""+getAreaInSqKm()+""+getDensityPerSqKm();
+        }
+
+        @Override
+        public int compareTo(StateCensusData stateCensusData) {
+                return this.getState().compareTo(stateCensusData.State);
+        }
 }

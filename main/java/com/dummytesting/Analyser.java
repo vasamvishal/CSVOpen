@@ -1,60 +1,61 @@
 
-//Welcome to the opencv program
-
-
-
+//Welcome to the opencsv program
 package com.dummytesting;
+import com.google.gson.Gson;
+import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
-import java.util.Iterator;
-public class Analyser {
-    public int OpenCSVBuilder(Reader reader, String POJO) throws ClassNotFoundException {
-        int noOfRecord = 0;
-        CsvToBean csvToBean = new CsvToBeanBuilder(reader)
-                .withType(Class.forName(POJO))
-                .withIgnoreLeadingWhiteSpace(true)
-                .build();
-        Iterator<StateCode> csvUserIterator = csvToBean.iterator();
-        while (csvUserIterator.hasNext()) {
-            csvUserIterator.next();
-            noOfRecord++;
-        }
-        
-        return  noOfRecord;
+import java.util.*;
 
-    }
+public class Analyser {
+
+    private static String SAMPLE_JSON_FILE_PATH="/home/user/Pictures/StateName.json";
 
     public int numberOfRecord(String SAMPLE_CSV_FILE_PATH, String POJO) throws CSVFileException, IOException, ClassNotFoundException {
-            int record=0;
+        Object record = 0;
+        int count=0;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
-            record = OpenCSVBuilder(reader, POJO);
-        } catch (NoSuchFileException e) {
-            e.printStackTrace();
-        } catch (RuntimeException e) {
-            throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ", CSVFileException.ExceptionType.WRONG_OPTIONS);
-        }
-
-        return record;
-    }
-
-    public int recordOfStateCensusData(String SAMPLE_CSV_FILE_PATH, String POJO) throws IOException, CSVFileException, ClassNotFoundException {
-        int record = 0;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));
-            record = OpenCSVBuilder(reader, POJO);
-        } catch (NoSuchFileException e) {
-            throw new CSVFileException("Please enter proper file name", CSVFileException.ExceptionType.NO_SUCHFILE);
-        } catch (RuntimeException e) {
+            List<StateCensusData> list = new ArrayList();
+            CsvToBean csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(Class.forName(POJO))
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+            Iterator csvUserIterator = csvToBean.iterator();
+            while (csvUserIterator.hasNext()) {
+                StateCensusData data = (StateCensusData) csvUserIterator.next();
+                list.add(data);
+                count++;
+            }
+            toSort(list);
+            Write(list);
+        }catch(NoSuchFileException e){
+                e.printStackTrace();
+            } catch(RuntimeException e){
                 throw new CSVFileException("Please enter proper fileName Or Delimiter Problem Or Header Problem ", CSVFileException.ExceptionType.WRONG_OPTIONS);
+            }
+        return count;
         }
-        return record;
+
+        private static void Write(List<StateCensusData> list) throws IOException {
+            Gson gson = new Gson();
+            String json = gson.toJson(list);
+            FileWriter writer = new FileWriter(SAMPLE_JSON_FILE_PATH);
+            writer.write(json);
+            writer.close();
+        }
+
+    private static void toSort(List<StateCensusData> list) {
+        Collections.sort(list);
     }
+
 }
 
 
