@@ -37,7 +37,7 @@ public class AnalyserTest {
     public void ShouldCatchException_forImproperDelimiter() throws CSVFileException, IOException, ClassNotFoundException {
         try {
             Analyser analyser = new Analyser();
-            analyser.numberOfRecord("/home/user/Pictures/StateCodeDuplicate.csv", "com.dummytesting.StateCode");
+            analyser.numberOfRecord("/home/user/Pictures/StateCensusDataDuplicate.csv", "com.dummytesting.StateCode");
         } catch (CSVFileException e) {
             Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS, e.type);
         }
@@ -47,7 +47,7 @@ public class AnalyserTest {
     public void ShouldCatchException_forHavingNoHeaders() throws CSVFileException, IOException, ClassNotFoundException {
         try {
             Analyser analyser = new Analyser();
-            analyser.numberOfRecord("/home/user/Pictures/StateCodeDuplicate.csv", "com.dummytesting.StateCode");
+            analyser.numberOfRecord("/home/user/Pictures/StateCensusDataDuplicate.csv", "com.dummytesting.StateCode");
         } catch (CSVFileException e) {
             Assert.assertEquals(CSVFileException.ExceptionType.WRONG_OPTIONS, e.type);
         }
